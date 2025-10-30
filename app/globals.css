@@ -1,26 +1,256 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Achtergrond */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-image: url("/fotos/Voltage.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0.6);
+  background-blend-mode: darken;
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* ✅ Navigatiebalk */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(20, 20, 20, 0.9);
+  color: white;
+  padding: 12px 0;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+
+.navbar-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-title {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.navbar-links a:hover {
+  background-color: #c97908;
+  color: #000;
+}
+
+/* ✅ Pagina layout */
+.content-area {
+  padding-top: 80px; /* ruimte voor navbar */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+/* Centrale container */
+.container-box {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 700px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* Koppen */
+h1, h2 {
+  color: #c38c40;
+  margin-bottom: 1rem;
+}
+
+/* Formulier & Inputs */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+input {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  background-color: #7b0000;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #a81818;
+}
+
+/* Lijst met scores */
+ul {
+  list-style: none;
+  margin-top: 20px;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  background: #f5f5f5;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+.admin-wrapper {
+  background: rgba(33, 32, 32, 0.96);
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: 4rem auto;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(4px);
+}
+
+.admin-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #c97908;
+  margin-bottom: 1.5rem;
+}
+
+/* Login */
+.login-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.login-input {
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+}
+
+.login-btn {
+  background-color: #7b0000;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-btn:hover {
+  background-color: #a81818;
+}
+
+.login-message {
+  color: #333;
+  font-size: 0.9rem;
+}
+
+/* Dashboard */
+.admin-dashboard {
+  margin-top: 1rem;
+}
+
+.admin-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.admin-status {
+  color: #157347;
+  font-weight: 600;
+}
+
+.logout-btn {
+  background-color: #b92d2b;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #d9534f;
+}
+
+/* Tabel */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.admin-table th {
+  background-color: #c97908;
+  color: white;
+  text-align: left;
+  padding: 10px;
+}
+
+.admin-table td {
+  border-top: 1px solid #ddd;
+  padding: 10px;
+}
+
+.admin-table tr:hover {
+  background-color: #f6f6f6;
+}
+
+/* Verwijderknop */
+.delete-btn {
+  background-color: #b40e0e;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.delete-btn:hover {
+  background-color: #e32e2e;
+}
+
+/* Naamkleur */
+.naam {
+  color: #ffcc00; /* goudkleurige naam */
+  font-weight: 600;
 }
