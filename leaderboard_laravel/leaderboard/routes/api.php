@@ -9,15 +9,16 @@ use App\Http\Controllers\Api\ScoreController;
 | API Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make fun building your API!
+| API-routes worden geladen door de RouteServiceProvider en krijgen de
+| "api" middleware groep toegewezen (o.a. geen CSRF cookie vereist).
 |
 */
 
+// Voorbeeld route (auth:sanctum) — laat gebruikersinfo teruggeven als geïdentificeerd
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Endpoint voor scores (geen CSRF omdat het in api routes valt)
+// Endpoint om nieuwe scores te plaatsen. Deze route valt onder de API groep
+// en is beveiligd met de 'leaderboard.token' middleware (controleert X-Token header)
 Route::post('/scores', [ScoreController::class, 'store'])->middleware('leaderboard.token');

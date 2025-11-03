@@ -14,3 +14,7 @@ class Score extends Model
         'submitted_from_ip',
     ];
 }
+
+// Model 'Score' representeert de tabel 'scores' in de database.
+// De $fillable array definieert welke velden mass-assignment toestaan
+// zodat we veilig Score::create($validated) kunnen gebruiken in controllers.

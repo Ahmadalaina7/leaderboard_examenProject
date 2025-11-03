@@ -9,24 +9,27 @@
 </head>
 
 <body class="bg-gray-100">
-    <nav class="bg-white shadow-sm">
+    {{-- Navigatiebalk bovenaan met link naar de publieke leaderboard en admin link -- zwart voor consistentie --}}
+    <nav class="bg-black text-white shadow-sm" style="background:#000;color:#fff;">
         <div class="container mx-auto px-4 py-3 flex items-center justify-between">
-            <a href="{{ route('leaderboard.index') }}" class="text-lg font-semibold">Leaderboard</a>
+            <a href="{{ route('leaderboard.index') }}" class="text-lg font-semibold text-white">Leaderboard</a>
             <div>
                 @if(session('is_admin'))
-                <a href="{{ route('admin.index') }}" class="mr-4 text-sm text-blue-600">Admin</a>
+                <a href="{{ route('admin.index') }}" class="mr-4 text-sm text-white">Admin</a>
                 <form method="POST" action="{{ route('admin.logout') }}" style="display:inline">@csrf
-                    <button class="text-sm text-red-600">Logout</button>
+                    <button class="text-sm text-white">Logout</button>
                 </form>
                 @else
-                <a href="{{ route('admin.login') }}" class="text-sm text-gray-600">Admin login</a>
+                <a href="{{ route('admin.login') }}" class="text-sm text-white">Admin login</a>
                 @endif
             </div>
         </div>
     </nav>
     <div class="container mx-auto px-4 py-8">
+        {{-- Titel van de pagina --}}
         <h1 class="text-4xl font-bold text-center mb-8">Leaderboard</h1>
 
+        {{-- Tabel met scores (hier worden de scores weergegeven) --}}
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
             <table class="min-w-full">
                 <thead class="bg-gray-800 text-white">
@@ -62,29 +65,37 @@
             </table>
         </div>
 
+        {{-- Formulier om een nieuwe score in te dienen --}}
         <div class="mt-8">
             <h2 class="text-xl font-semibold mb-4 text-center">Score indienen</h2>
 
             <div class="max-w-md mx-auto bg-white p-6 rounded shadow">
+                {{-- Uitlegtekst voor gebruikers over het formulier --}}
                 <p class="text-sm text-gray-600 mb-4">Voer je naam en score in. Je moet een geldige token opgeven om te kunnen indienen.</p>
 
+                {{-- Plaats waar foutmeldingen of succesberichten verschijnen --}}
                 <div id="form-alert" class="hidden mb-4 text-sm"></div>
 
+                {{-- Token invoerveld (masked) en knop om deze tijdelijk zichtbaar te maken --}}
                 <label class="block mb-2">Token</label>
                 <div class="flex items-center gap-2 mb-3">
                     <input id="token" type="password" class="flex-1 border px-3 py-2 rounded" placeholder="X-Token" />
                     <button id="toggleShowToken" class="text-sm text-gray-600 px-2 py-1">Toon</button>
                 </div>
                 <div class="flex items-center gap-3 mb-3 text-sm">
+                    {{-- Knop om het token uit het invoerveld te wissen --}}
                     <button id="clearToken" class="text-sm text-gray-500">Wis token</button>
                 </div>
 
+                {{-- Speler naam veld --}}
                 <label class="block mb-2">Speler</label>
                 <input id="player_name" type="text" class="w-full border px-3 py-2 rounded mb-3" placeholder="Naam" />
 
+                {{-- Score invoer veld --}}
                 <label class="block mb-2">Score</label>
                 <input id="score" type="number" min="0" class="w-full border px-3 py-2 rounded mb-3" placeholder="Score" />
 
+                {{-- Verzenden knop --}}
                 <div class="flex justify-center items-center">
                     <button id="submitBtn" class="bg-blue-600 text-white px-4 py-2 rounded">Verstuur score</button>
                 </div>
@@ -96,6 +107,11 @@
         </div>
     </div>
 
+    {{--
+        Uitleg (NL): Dit script behandelt token-beheer en het versturen van scores.
+        Belangrijk: tokens worden bewust NIET in localStorage/sessionStorage opgeslagen.
+        Ze blijven alleen in het invoerveld aanwezig terwijl de pagina open is.
+    --}}
     <script>
         // Auto-refresh elke 30 seconden
         setInterval(() => {
